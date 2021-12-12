@@ -14,9 +14,9 @@
     <form action="post_by_tag.html">
         <p>По тегу</p>
         <select name="tag" >
-                <option value="еда">еда</option>
-                <option value="природа">природа</option>
-                <option value="вечеринка">вечеринка</option>
+            {% for hashtag in hashtags%}
+                <option value="{{hashtag}}">{{hashtag}}</option>
+            {% endfor %}
         </select>
         <input type="submit" value="Найти" class="button">
     </form>
