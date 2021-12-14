@@ -8,9 +8,9 @@
 <body>
 <main>
 
-    <a href="index.html" class="link">Назад</a>
+    <a href="/" class="link">Назад</a>
 
-    <h1>Посты по тегу “Еда”</h1>
+    <h1>Посты по тегу {{category}}</h1>
 
     <div class="post">
         {% for item in posts%}
@@ -21,7 +21,7 @@
 
     <hr>
 
-    <a href="post_form.html" class="button">Добавить пост</a>
+    <a href="/post" class="button">Добавить пост</a>
 
 </main>
 </body>

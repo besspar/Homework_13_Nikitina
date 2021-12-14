@@ -22,7 +22,7 @@ def page_tag():
     search = request.args.get("tag")
     matched_posts = get_posts(search)
 
-    return render_template("post_by_tag.html", posts=matched_posts)
+    return render_template("post_by_tag.html", posts=matched_posts, category=search)
 
 
 
@@ -32,14 +32,14 @@ def page_post_create():
     if request.method == "GET":
         return render_template("post_form.html")
     if request.method == "POST":
-        content = request.form.get["content"]
-        picture = request.files.get['picture']
-        path = os.path.join("/uploads/images/", UPLOAD_FOLDER, f'{picture.filename}')
+        content = request.form.get("content")
+        picture = request.files.get('picture')
+        path = os.path.join(UPLOAD_FOLDER, f'{picture.filename}')
         post = {"pic": url_for("static_dir", path=picture.filename),
                 "content": content}
         picture.save(path)
-        add_post(POST_PATH, content)
-        return render_template("post_uploaded.html", content=content)
+        add_post(path, content)
+        return render_template("post_uploaded.html", content=content, path=path)
 
 
 
