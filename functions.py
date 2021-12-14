@@ -9,10 +9,8 @@ def get_hashtags():
     post_letters = ''
     for item in posts:
         post_text = item['content']
-        for letter in post_text:
-            if letter not in ['!', ',', '.', '-', '?', '%', '$', '@']:
-                post_letters += letter
-        post_words = post_letters.split()
+
+        post_words = post_text.split()
         for word in post_words:
             if word.startswith("#"):
                 hashtag_list.append(word)
@@ -45,9 +43,14 @@ def add_post(path, content):
     with open("posts.json", "r") as posts_file:
         posts = json.load(posts_file)
 
+    path = "/" + path
     posts_content = {"pic": path, "content": content}
 
     posts.append(posts_content)
 
     with open("posts.json", "w") as posts_file:
         json.dump(posts, posts_file, ensure_ascii=False, indent=4)
+
+
+s = get_hashtags()
+print (s)
