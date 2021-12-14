@@ -41,17 +41,13 @@ def get_posts(tag):
     return posts_list
 
 
-def add_post(file, content):
+def add_post(path, content):
     with open("posts.json", "r") as posts_file:
         posts = json.load(posts_file)
 
-    posts_content = {"pic": "file_path", "content": content}
+    posts_content = {"pic": path, "content": content}
 
     posts.append(posts_content)
 
-    with open ("posts.json", "w") as posts_file:
+    with open("posts.json", "w") as posts_file:
         json.dump(posts, posts_file, ensure_ascii=False, indent=4)
-
-
-
-

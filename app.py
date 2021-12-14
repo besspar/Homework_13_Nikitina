@@ -1,6 +1,8 @@
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory, url_for
 import json
 from functions import *
+import os
+from pathlib import Path
 
 POST_PATH = "posts.json"
 UPLOAD_FOLDER = "uploads/images"
@@ -30,11 +32,14 @@ def page_post_create():
     if request.method == "GET":
         return render_template("post_form.html")
     if request.method == "POST":
-        content = request.form["content"]
-        file = request.files['picture']
-        if file:
-            add_post(file, content)
-            return render_template("post_uploaded.html", content=content)
+        content = request.form.get["content"]
+        picture = request.files.get['picture']
+        path = os.path.join("/uploads/images/", UPLOAD_FOLDER, f'{picture.filename}')
+        post = {"pic": url_for("static_dir", path=picture.filename),
+                "content": content}
+        picture.save(path)
+        add_post(POST_PATH, content)
+        return render_template("post_uploaded.html", content=content)
 
 
 
